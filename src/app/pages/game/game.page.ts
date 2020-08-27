@@ -25,9 +25,9 @@ export class GamePage implements OnInit, AfterViewInit {
   points$: Observable<number>;
   fails$: Observable<number>;
 
-  @ViewChild('fizz', {static: true}) fizzButton: ElementRef;
-  @ViewChild('buzz', {static: true}) buzzButton: ElementRef;
-  @ViewChild('fizzBuzz', {static: true}) fizzBuzzButton: ElementRef;
+  @ViewChild('fizz', {static: true, read: ElementRef}) fizzButton: ElementRef;
+  @ViewChild('buzz', {static: true, read: ElementRef}) buzzButton: ElementRef;
+  @ViewChild('fizzBuzz', {static: true, read: ElementRef}) fizzBuzzButton: ElementRef;
 
   constructor(private fizzbuzzService: FizzbuzzService) { }
   ngOnInit() {
@@ -35,7 +35,6 @@ export class GamePage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log(this.fizzButton);
     const fizzBet$ = fromEvent(this.fizzButton.nativeElement, 'click');
     const buzzBet$ = fromEvent(this.buzzButton.nativeElement, 'click');
     const fizzBuzzBet$ = fromEvent(this.fizzBuzzButton.nativeElement, 'click');

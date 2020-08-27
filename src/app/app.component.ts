@@ -12,6 +12,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   pages = [
     {
+      title: 'photo test',
+      url: '/enter-highscore'
+    },
+    {
       title: 'Welcome Page',
       url: '/welcome'
     },

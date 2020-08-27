@@ -5,10 +5,11 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {FizzbuzzService} from './services/fizzbuzz.service';
+import { FizzbuzzService } from './services/fizzbuzz.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,8 +18,10 @@ import {FizzbuzzService} from './services/fizzbuzz.service';
   providers: [
     StatusBar,
     SplashScreen,
+    FizzbuzzService,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-      FizzbuzzService
+
   ],
   bootstrap: [AppComponent]
 })

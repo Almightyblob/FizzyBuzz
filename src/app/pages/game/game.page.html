@@ -3,19 +3,14 @@
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>game</ion-title>
+    <ion-title>GL HF!</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="gameContainer">
     <div *ngIf="gameOn === true" class="counterContainer">
-      <div class="rightOrWrong">
-        <p *ngIf="(result$ | async) == true" id="good">
-          GOOD!
-        </p>
-      </div>
-      <div class="fizzbuzzCounter"
+      <div class="fizzbuzzCounter ion-text-center"
            *ngIf="(fizzBuzz$ | async) as fizzBuzz">
         <h1 *ngIf="isNumber(fizzBuzz) || (result$ | async) == true ; else NA">
           {{fizzBuzz}}
@@ -26,35 +21,60 @@
           </h1>
         </ng-template>
       </div>
-      <div class="rightOrWrong">
-        <p *ngIf="(result$ | async) == false" id="wrong">
-          WRONG!
-        </p>
-      </div>
     </div>
-    <div class ="buttons">
-      <button #fizz [hidden]="gameOn === false">
+
+    <ion-grid *ngIf="gameOn === true">
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-item>
+            <p>
+              <ion-text color="success">
+                Points: <span>{{points$ | async}}</span>
+              </ion-text>
+            </p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-item>
+            <p>
+              <ion-text color="danger">
+                Fails: <span>{{fails$ | async}} </span> / 3
+              </ion-text>
+            </p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="buttons ion-text-center ion-padding">
+      <ion-button #fizz [hidden]="gameOn === false" color="secondary">
         FIZZ
-      </button>
-      <button #buzz [hidden]="gameOn === false">
+      </ion-button>
+      <ion-button #buzz [hidden]="gameOn === false" color="primary">
         BUZZ
-      </button>
-      <button #fizzBuzz [hidden]="gameOn === false">
+      </ion-button>
+      <ion-button #fizzBuzz [hidden]="gameOn === false" color="tertiary">
         FIZZBUZZ!!!
-      </button>
+      </ion-button>
     </div>
-    <div *ngIf="gameOn === true">
-      <div class="points">
-        <p>
-          Points: <span>{{points$ | async}}</span>
-        </p>
-        <p>
-          Fails: <span>{{fails$ | async}} </span> / 3
-        </p>
-      </div>
+
+    <div class="rightOrWrong ion-text-center" *ngIf="gameOn === true">
+      <h1 *ngIf="(result$ | async) == true" id="good">
+        <ion-text color="success">
+          GOOD!
+        </ion-text>
+      </h1>
+      <h1 *ngIf="(result$ | async) == false" id="wrong">
+        <ion-text color="danger">
+          WRONG!
+        </ion-text>
+      </h1>
     </div>
-    <div *ngIf="gameOn === false" class="startButton-container">
-      <button  (click)="startGame()">START</button>
+
+    <div *ngIf="gameOn === false" class="startButton-container ion-padding ion-text-center">
+      <ion-button (click)="startGame()">START</ion-button>
     </div>
   </div>
 

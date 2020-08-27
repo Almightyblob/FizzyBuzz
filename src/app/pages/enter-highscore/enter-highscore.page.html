@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>enter-highscore</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <img [src]="currentImage" *ngIf="currentImage" alt="x">
+
+    <ion-button (click)="takePicture()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-button>
+</ion-content>
