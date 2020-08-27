@@ -8,5 +8,54 @@
 </ion-header>
 
 <ion-content>
+  <div class="gameContainer">
+    <div *ngIf="gameOn === true" class="counterContainer">
+      <div class="rightOrWrong">
+        <p *ngIf="(result$ | async) == true" id="good">
+          GOOD!
+        </p>
+      </div>
+      <div class="fizzbuzzCounter"
+           *ngIf="(fizzBuzz$ | async) as fizzBuzz">
+        <h1 *ngIf="isNumber(fizzBuzz) || (result$ | async) == true ; else NA">
+          {{fizzBuzz}}
+        </h1>
+        <ng-template #NA>
+          <h1>
+            ??
+          </h1>
+        </ng-template>
+      </div>
+      <div class="rightOrWrong">
+        <p *ngIf="(result$ | async) == false" id="wrong">
+          WRONG!
+        </p>
+      </div>
+    </div>
+    <div class ="buttons">
+      <button #fizz [hidden]="gameOn === false">
+        FIZZ
+      </button>
+      <button #buzz [hidden]="gameOn === false">
+        BUZZ
+      </button>
+      <button #fizzBuzz [hidden]="gameOn === false">
+        FIZZBUZZ!!!
+      </button>
+    </div>
+    <div *ngIf="gameOn === true">
+      <div class="points">
+        <p>
+          Points: <span>{{points$ | async}}</span>
+        </p>
+        <p>
+          Fails: <span>{{fails$ | async}} </span> / 3
+        </p>
+      </div>
+    </div>
+    <div *ngIf="gameOn === false" class="startButton-container">
+      <button  (click)="startGame()">START</button>
+    </div>
+  </div>
 
 </ion-content>
