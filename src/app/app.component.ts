@@ -25,7 +25,7 @@ export class AppComponent {
     },
     {
       title: 'Play',
-      url: '/game'
+      url: '/start-game'
     },
     {
       title: 'High Score',

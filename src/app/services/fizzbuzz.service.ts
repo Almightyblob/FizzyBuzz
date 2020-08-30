@@ -1,5 +1,5 @@
 import {interval, Observable, Subscription, zip} from 'rxjs';
-import {map, share} from 'rxjs/operators';
+import {map, share, tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 
 @Injectable()
@@ -16,13 +16,13 @@ export class FizzbuzzService {
     buzz$: Observable<'Buzz'> = this.numbers$.pipe(
         map(n => (n % 5 === 0) ? 'Buzz' : null)
     );
-    fizzBuzz$ = zip<[string, string, number]>(
-        this.fizz$, this.buzz$, this.numbers$
+    fizzBuzz$ = zip<[number, string, string ]>(
+        this.numbers$, this.fizz$, this.buzz$
     )
         .pipe(
-            map(arr => (arr.slice(0, 2).some(Boolean)) ?
-                arr.slice(0, -1).join('') : +arr.join((''))
+            map(arr => (arr.filter( item => item !== null))
             ),
+            tap(console.log),
             share()
         );
 }

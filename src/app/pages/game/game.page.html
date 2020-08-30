@@ -8,74 +8,37 @@
 </ion-header>
 
 <ion-content>
-  <div class="gameContainer">
-    <div *ngIf="gameOn === true" class="counterContainer">
-      <div class="fizzbuzzCounter ion-text-center"
-           *ngIf="(fizzBuzz$ | async) as fizzBuzz">
-        <h1 *ngIf="isNumber(fizzBuzz) || (result$ | async) == true ; else NA">
-          {{fizzBuzz}}
-        </h1>
-        <ng-template #NA>
-          <h1>
-            ??
-          </h1>
-        </ng-template>
-      </div>
-    </div>
-
-    <ion-grid *ngIf="gameOn === true">
-      <ion-row>
-        <ion-col size-md="6" offset-md="3">
-          <ion-item>
-            <p>
-              <ion-text color="success">
-                Points: <span>{{points$ | async}}</span>
-              </ion-text>
-            </p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size-md="6" offset-md="3">
-          <ion-item>
-            <p>
-              <ion-text color="danger">
-                Fails: <span>{{fails$ | async}} </span> / 3
-              </ion-text>
-            </p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <h1>
+    {{fizzBuzz$ | async | slice:0:1}}
+  </h1>
+  <h1 *ngIf="(fizzBuzz$ | async)?.length > 1">
+    FIZZ, BUZZ or FIZZBUZZ?
+  </h1>
+  <p *ngIf="(result$ | async) === true">
+    CORRECT
+  </p>
+  <p *ngIf="(result$ | async) === false">
+    WRONG
+  </p>
 
     <div class="buttons ion-text-center ion-padding">
-      <ion-button #fizz [hidden]="gameOn === false" color="secondary">
+      <ion-button #fizz color="secondary">
         FIZZ
       </ion-button>
-      <ion-button #buzz [hidden]="gameOn === false" color="primary">
+      <ion-button #buzz color="primary">
         BUZZ
       </ion-button>
-      <ion-button #fizzBuzz [hidden]="gameOn === false" color="tertiary">
+      <ion-button #fizzBuzz color="tertiary">
         FIZZBUZZ!!!
       </ion-button>
     </div>
 
-    <div class="rightOrWrong ion-text-center" *ngIf="gameOn === true">
-      <h1 *ngIf="(result$ | async) == true" id="good">
-        <ion-text color="success">
-          GOOD!
-        </ion-text>
-      </h1>
-      <h1 *ngIf="(result$ | async) == false" id="wrong">
-        <ion-text color="danger">
-          WRONG!
-        </ion-text>
-      </h1>
-    </div>
+  <p>
+    points: {{points$ | async}}
+  </p>
+  <p>
+    fails: {{fails$ | async}} / 3
+  </p>
 
-    <div *ngIf="gameOn === false" class="startButton-container ion-padding ion-text-center">
-      <ion-button (click)="startGame()">START</ion-button>
-    </div>
-  </div>
 
 </ion-content>

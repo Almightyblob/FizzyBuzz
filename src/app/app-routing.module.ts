@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'enter-highscore',
     loadChildren: () => import('./pages/enter-highscore/enter-highscore.module').then( m => m.EnterHighscorePageModule)
+  },
+  {
+    path: 'start-game',
+    loadChildren: () => import('./pages/start-game/start-game.module').then(m => m.StartGamePageModule)
   }
 ];
 

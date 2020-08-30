@@ -18,9 +18,8 @@ import {
 })
 export class GamePage implements OnInit, AfterViewInit {
   title = 'fizzbuzz';
-  gameOn = false;
 
-  fizzBuzz$: Observable<string | number>;
+  fizzBuzz$: Observable<[]>;
   result$: Observable<boolean>;
   points$: Observable<number>;
   fails$: Observable<number>;
@@ -51,34 +50,31 @@ export class GamePage implements OnInit, AfterViewInit {
         .pipe(
             switchMap(currentFizz => userInput$.pipe(
                 map( input => {
-                  if (typeof currentFizz === 'number' || input === 'None'){
+                  if (currentFizz.length <= 1 || input === 'None'){
                     return null;
-                  } else if (currentFizz === input) {
-                    return true;
-                  } else if (currentFizz !== input) {
-                    return false;
+                  } else if (currentFizz.slice(1).join('') === input) {
+                      console.log(currentFizz.slice(1));
+                      return true;
+                  } else if (currentFizz.slice(1).join('') !== input) {
+                      console.log(currentFizz.slice(1));
+                      return false;
                   }
                 }),
                 share()
             ))
         );
 
-    const points: Observable<number> = this.result$.pipe(
+    this.points$ = this.result$.pipe(
         filter(result => result === true),
-        mapTo(1)
-    );
-
-    const fails: Observable<number> = this.result$.pipe(
+        mapTo(1),
+        scan((acc, one) => acc + one, 0));
+    this.fails$ = this.result$.pipe(
         filter(result => result === false),
-        mapTo(1)
-    );
-
-    this.points$ = points.pipe(scan((acc, one) => acc + one, 0));
-    this.fails$ = fails.pipe(scan((acc, one) => acc + one, 0),
+        mapTo(1),
+        scan((acc, one) => acc + one, 0),
         tap(x => {
               if (x >= 3) {
                 alert('GAME OVER');
-                this.gameOn = false;
               }
             }
         )
@@ -86,10 +82,5 @@ export class GamePage implements OnInit, AfterViewInit {
   }
 
   isNumber(val): boolean { return typeof val === 'number'; }
-
-  startGame() {
-    this.gameOn = true;
-  }
-
 
 }
