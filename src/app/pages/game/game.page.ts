@@ -1,15 +1,16 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 
 import {FizzbuzzService} from '../../services/fizzbuzz.service';
-import {fromEvent, interval, Observable, of} from 'rxjs';
+import {fromEvent, interval, Observable, of, Subject} from 'rxjs';
 import {
-  mapTo,
-  merge,
-  switchMap,
-  distinctUntilChanged,
-  map,
-  filter, scan, tap, share
+    mapTo,
+    merge,
+    switchMap,
+    distinctUntilChanged,
+    map,
+    filter, scan, tap, share,
 } from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -29,7 +30,7 @@ export class GamePage implements OnInit, AfterViewInit {
   @ViewChild('buzz', {static: true, read: ElementRef}) buzzButton: ElementRef;
   @ViewChild('fizzBuzz', {static: true, read: ElementRef}) fizzBuzzButton: ElementRef;
 
-  constructor(private fizzbuzzService: FizzbuzzService) { }
+  constructor(private fizzbuzzService: FizzbuzzService, private router: Router) { }
   ngOnInit() {
     this.fizzBuzz$ = this.fizzbuzzService.fizzBuzz$;
   }
@@ -55,10 +56,8 @@ export class GamePage implements OnInit, AfterViewInit {
                   if (currentFizz.length <= 1 || input === 'None'){
                     return null;
                   } else if (currentFizz.slice(1).join('') === input) {
-                      console.log(currentFizz.slice(1));
                       return true;
                   } else if (currentFizz.slice(1).join('') !== input) {
-                      console.log(currentFizz.slice(1));
                       return false;
                   }
                 }),
@@ -69,21 +68,21 @@ export class GamePage implements OnInit, AfterViewInit {
     this.points$ = this.result$.pipe(
         filter(result => result === true),
         mapTo(1),
-        scan((acc, one) => acc + one, 0));
+        scan((acc, one) => acc + one, 0),
+        tap( score => this.fizzbuzzService.highscore$.next(score)),
+        share());
     this.fails$ = this.result$.pipe(
         filter(result => result === false),
         mapTo(1),
         scan((acc, one) => acc + one, 0),
         tap(x => {
               if (x >= 3) {
-                alert('GAME OVER');
+                  console.log(this.fizzbuzzService.highscore$.value);
+                  this.router.navigate(['/enter-highscore'], {replaceUrl: true });
               }
             }
         )
     );
-  }
-  colorCheck() {
-
   }
 
 }

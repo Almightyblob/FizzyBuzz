@@ -10,17 +10,19 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FizzbuzzService } from './services/fizzbuzz.service';
+import {FormBuilder} from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
-    StatusBar,
-    SplashScreen,
-    FizzbuzzService,
-    Camera,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+      FormBuilder,
+      StatusBar,
+      SplashScreen,
+      FizzbuzzService,
+      Camera,
+      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 
   ],
   bootstrap: [AppComponent]

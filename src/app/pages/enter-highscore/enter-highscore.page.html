@@ -11,4 +11,17 @@
     <ion-button (click)="takePicture()" >
       <ion-icon name="camera"></ion-icon>
     </ion-button>
+
+  <h3>NEW HIGH SCORE:</h3>
+  <h3>{{highscore}}</h3>
+
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+  </form>
+
+  <p> Do you want to save your highscore?</p>
+  <ion-button (click)="save()">Yes</ion-button>
 </ion-content>

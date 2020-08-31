@@ -1,6 +1,11 @@
-import {interval, Observable, Subscription, zip} from 'rxjs';
+import {BehaviorSubject, interval, Observable, Subject, Subscription, zip} from 'rxjs';
 import {map, share, tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
+
+interface Highscore  {
+    name: string;
+    score: number;
+}
 
 @Injectable()
 export class FizzbuzzService {
@@ -25,5 +30,8 @@ export class FizzbuzzService {
             tap(console.log),
             share()
         );
+
+    highscore$ = new BehaviorSubject<number>(0);
+    highscores: Highscore[];
 }
 
