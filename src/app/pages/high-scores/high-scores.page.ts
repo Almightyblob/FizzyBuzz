@@ -13,7 +13,7 @@ export class HighScoresPage implements OnInit{
 
   ngOnInit() {
     console.log('INIT');
-    this.highscores = this.fizzBuzzService.highscores
+    this.highscores = this.fizzBuzzService.highscores;
   }
 
   ionViewWillEnter(){

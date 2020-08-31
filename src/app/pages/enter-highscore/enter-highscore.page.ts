@@ -42,6 +42,9 @@ export class EnterHighscorePage implements OnInit {
 
   save() {
     this.fizzBuzzService.highscores.push({name: this.form.value.name, score: this.highscore});
+    this.fizzBuzzService.highscores.sort((a, b) => {
+      return b.score - a.score;
+    });
     this.router.navigate(['/high-scores'], {replaceUrl: true});
   }
 
