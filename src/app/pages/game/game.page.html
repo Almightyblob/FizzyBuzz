@@ -8,37 +8,88 @@
 </ion-header>
 
 <ion-content>
-  <h1>
-    {{fizzBuzz$ | async | slice:0:1}}
-  </h1>
-  <h1 *ngIf="(fizzBuzz$ | async)?.length > 1">
-    FIZZ, BUZZ or FIZZBUZZ?
-  </h1>
-  <p *ngIf="(result$ | async) === true">
-    CORRECT
-  </p>
-  <p *ngIf="(result$ | async) === false">
-    WRONG
-  </p>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3" class="ion-text-center">
+        <h1>
+          {{fizzBuzz$ | async | slice:0:1}}
+        </h1>
+      </ion-col>
+    </ion-row>
+    <ion-row [ngStyle]="{color: (fizzBuzz$ | async)?.length >=2 ? 'darkgray' : 'slategray'}">
+      <ion-col size-md="3" offset-md="3" class="ion-text-center">
+        <h2>
+          <ion-text [color]="((result$ | async) === true && (userInput$ | async) === 'Fizz') && 'secondary'">
+            FIZZ
+          </ion-text>
+        </h2>
+      </ion-col>
+      <ion-col size-md="3" class="ion-text-center">
+        <h2>
+          <ion-text [color]="((result$ | async) === true && (userInput$ | async) === 'Buzz') && 'primary'">
+            BUZZ
+          </ion-text>
+        </h2>
+      </ion-col>
+    </ion-row>
+    <ion-row [ngStyle]="{color: (fizzBuzz$ | async)?.length >=2 ? 'darkgray' : 'slategray'}">
+      <ion-col size-md="6" offset-md="3" class="ion-text-center">
+        <h2>
+          <ion-text [color]="((result$ | async) === true && (userInput$ | async) === 'FizzBuzz') && 'tertiary'">
+            FIZZBUZZ
+          </ion-text>
+        </h2>
+      </ion-col>
+    </ion-row>
+    <ion-row [ngStyle]="{color: 'gray'}">
+      <ion-col size-md="3" offset-md="3" class="ion-text-center">
+        <ion-icon name="happy-outline"
+                  size="large"
+                  [ngStyle]="(result$ | async) === true && {color: 'green'}">
+        </ion-icon>
+      </ion-col>
+      <ion-col size-md="3" class="ion-text-center">
+        <ion-icon name="sad-outline"
+                  size="large"
+                  [ngStyle]=" (result$ | async) === false && {color: 'red'}">
+        </ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center">
+      <ion-col size-md="6" offset-md="3">
+        <ion-button #fizz color="secondary">
+          FIZZ
+        </ion-button>
+        <ion-button #buzz color="primary">
+          BUZZ
+        </ion-button>
+        <ion-button #fizzBuzz color="tertiary">
+          FIZZBUZZ!!!
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3" class="ion-text-center">
+        <p>
+          <ion-text color="success">
+            points: {{points$ | async}}
+          </ion-text>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3" class="ion-text-center">
+        <p>
+          <ion-text color="danger">
+            fails: {{fails$ | async}} / 3
+          </ion-text>
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-    <div class="buttons ion-text-center ion-padding">
-      <ion-button #fizz color="secondary">
-        FIZZ
-      </ion-button>
-      <ion-button #buzz color="primary">
-        BUZZ
-      </ion-button>
-      <ion-button #fizzBuzz color="tertiary">
-        FIZZBUZZ!!!
-      </ion-button>
-    </div>
 
-  <p>
-    points: {{points$ | async}}
-  </p>
-  <p>
-    fails: {{fails$ | async}} / 3
-  </p>
+
 
 
 </ion-content>

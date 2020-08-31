@@ -23,6 +23,7 @@ export class GamePage implements OnInit, AfterViewInit {
   result$: Observable<boolean>;
   points$: Observable<number>;
   fails$: Observable<number>;
+  userInput$: Observable<unknown>;
 
   @ViewChild('fizz', {static: true, read: ElementRef}) fizzButton: ElementRef;
   @ViewChild('buzz', {static: true, read: ElementRef}) buzzButton: ElementRef;
@@ -38,17 +39,18 @@ export class GamePage implements OnInit, AfterViewInit {
     const buzzBet$ = fromEvent(this.buzzButton.nativeElement, 'click');
     const fizzBuzzBet$ = fromEvent(this.fizzBuzzButton.nativeElement, 'click');
 
-    const userInput$ = of().pipe(merge(
+    this.userInput$ = of().pipe(merge(
         fizzBet$.pipe(mapTo('Fizz')),
         buzzBet$.pipe(mapTo('Buzz')),
         fizzBuzzBet$.pipe(mapTo('FizzBuzz')),
         interval(1990).pipe(mapTo('None'))),
-        distinctUntilChanged()
+        distinctUntilChanged(),
+        share()
     );
 
     this.result$ = this.fizzBuzz$
         .pipe(
-            switchMap(currentFizz => userInput$.pipe(
+            switchMap(currentFizz => this.userInput$.pipe(
                 map( input => {
                   if (currentFizz.length <= 1 || input === 'None'){
                     return null;
@@ -80,7 +82,8 @@ export class GamePage implements OnInit, AfterViewInit {
         )
     );
   }
+  colorCheck() {
 
-  isNumber(val): boolean { return typeof val === 'number'; }
+  }
 
 }
