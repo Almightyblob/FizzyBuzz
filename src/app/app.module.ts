@@ -11,11 +11,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FizzbuzzService } from './services/fizzbuzz.service';
 import {FormBuilder} from '@angular/forms';
+import {IonicStorageModule} from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
   providers: [
       FormBuilder,
       StatusBar,

@@ -77,7 +77,6 @@ export class GamePage implements OnInit, AfterViewInit {
         scan((acc, one) => acc + one, 0),
         tap(x => {
               if (x >= 3) {
-                  console.log(this.fizzbuzzService.highscore$.value);
                   this.router.navigate(['/enter-highscore'], {replaceUrl: true });
               }
             }

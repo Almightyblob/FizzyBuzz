@@ -3,7 +3,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {FizzbuzzService} from '../../services/fizzbuzz.service';
-import {Highscore} from '../../models/highscore.model';
 
 @Component({
   selector: 'app-enter-highscore',
@@ -47,6 +46,7 @@ export class EnterHighscorePage implements OnInit {
     this.fizzBuzzService.highscores.sort((a, b) => {
       return b.score - a.score;
     });
+    this.fizzBuzzService.storage.set('highscores', this.fizzBuzzService.highscores);
     this.router.navigate(['/high-scores'], {replaceUrl: true});
   }
 

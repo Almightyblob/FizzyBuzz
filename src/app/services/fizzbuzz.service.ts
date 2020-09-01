@@ -2,9 +2,12 @@ import {BehaviorSubject, interval, Observable, Subject, Subscription, zip} from 
 import {map, share, tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Highscore} from '../models/highscore.model';
+import {Storage} from '@ionic/storage';
 
 @Injectable()
 export class FizzbuzzService {
+    constructor(public storage: Storage) {
+    }
 
     numbers$: Observable<number> = interval(2000).pipe(
         map(n => n += 1),
