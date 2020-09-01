@@ -12,7 +12,10 @@
     <ion-row>
       <ion-col size-md="6" offset-md="3">
         <ion-item *ngFor="let highscore of highscores">
-          <p slot="start">
+          <ion-avatar slot="start">
+          <img [src]="highscore.photo" alt="">
+          </ion-avatar>
+          <p>
             {{highscore.score}}
           </p>
           <p slot="end">

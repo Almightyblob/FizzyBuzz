@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import {FizzbuzzService} from '../../services/fizzbuzz.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
+import {FizzbuzzService} from '../../services/fizzbuzz.service';
+import {Highscore} from '../../models/highscore.model';
 
 @Component({
   selector: 'app-enter-highscore',
@@ -10,7 +11,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./enter-highscore.page.scss'],
 })
 export class EnterHighscorePage implements OnInit {
-  currentImage: any;
+  currentImage = '../../assets/images/default-avatar.png';
   highscore: number;
   private form: FormGroup;
 
@@ -29,7 +30,8 @@ export class EnterHighscorePage implements OnInit {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
     };
 
     this.camera.getPicture(options).then((imageData) => {
@@ -41,7 +43,7 @@ export class EnterHighscorePage implements OnInit {
   }
 
   save() {
-    this.fizzBuzzService.highscores.push({name: this.form.value.name, score: this.highscore});
+    this.fizzBuzzService.highscores.push({name: this.form.value.name, score: this.highscore, photo: this.currentImage});
     this.fizzBuzzService.highscores.sort((a, b) => {
       return b.score - a.score;
     });
