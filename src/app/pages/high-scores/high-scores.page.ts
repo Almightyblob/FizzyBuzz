@@ -16,7 +16,10 @@ export class HighScoresPage implements OnInit{
   loadScores() {
     this.fizzBuzzService.storage.get('highscores').then((highscores) => {
       this.highscores = highscores || [];
-      console.log(highscores);
+    }).then(() => {
+      this.highscores.sort((a, b) => {
+        return b.score - a.score;
+      });
     });
   }
 
@@ -25,13 +28,12 @@ export class HighScoresPage implements OnInit{
   }
 
   resetScores(){
-    this.fizzBuzzService.storage.clear().then(() => {
-        this.highscores = [];
-      });
+    this.fizzBuzzService.highscores = [];
+    this.fizzBuzzService.storage.clear();
+    this.loadScores();
   }
 
   ngOnInit() {
-    console.log('INIT');
     this.loadScores();
   }
 }

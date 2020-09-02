@@ -42,12 +42,15 @@ export class EnterHighscorePage implements OnInit {
   }
 
   save() {
-    this.fizzBuzzService.highscores.push({name: this.form.value.name, score: this.highscore, photo: this.currentImage});
-    this.fizzBuzzService.highscores.sort((a, b) => {
-      return b.score - a.score;
-    });
-    this.fizzBuzzService.storage.set('highscores', this.fizzBuzzService.highscores);
-    this.router.navigate(['/high-scores'], {replaceUrl: true});
+    const newHighscore = {name: this.form.value.name, score: this.highscore, photo: this.currentImage};
+    this.fizzBuzzService.storage.get('highscores').then( highscores => {
+      if (Array.isArray(highscores)){
+        this.fizzBuzzService.storage.set('highscores', [...highscores, newHighscore]);
+        console.log(highscores);
+      } else {
+        this.fizzBuzzService.storage.set('highscores', [newHighscore]);
+      }
+    }).then(() => this.router.navigate(['/high-scores'], {replaceUrl: true}));
   }
 
   ngOnInit() {

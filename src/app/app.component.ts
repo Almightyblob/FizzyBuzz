@@ -28,8 +28,8 @@ export class AppComponent {
       url: '/start-game'
     },
     {
-      title: 'High Score',
-      url: '/high-score'
+      title: 'High Scores',
+      url: '/high-scores'
     }
   ];
 
