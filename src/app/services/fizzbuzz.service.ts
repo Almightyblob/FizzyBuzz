@@ -10,7 +10,7 @@ export class FizzbuzzService {
     }
 
     numbers$: Observable<number> = interval(2000).pipe(
-        map(n => n += 1),
+        map(n => n += 1)
     );
 
     fizz$: Observable<'Fizz'> = this.numbers$.pipe(
@@ -18,7 +18,7 @@ export class FizzbuzzService {
     );
 
     buzz$: Observable<'Buzz'> = this.numbers$.pipe(
-        map(n => (n % 5 === 0) ? 'Buzz' : null)
+        map(n => (n % 5 === 0) ? 'Buzz' : null),
     );
     fizzBuzz$ = zip<[number, string, string ]>(
         this.numbers$, this.fizz$, this.buzz$
@@ -31,6 +31,5 @@ export class FizzbuzzService {
         );
 
     highscore$ = new BehaviorSubject<number>(0);
-    highscores: Highscore[] = [];
 }
 

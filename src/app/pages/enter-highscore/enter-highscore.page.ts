@@ -3,6 +3,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {FizzbuzzService} from '../../services/fizzbuzz.service';
+import {Highscore} from '../../models/highscore.model';
 
 @Component({
   selector: 'app-enter-highscore',
@@ -43,7 +44,7 @@ export class EnterHighscorePage implements OnInit {
 
   save() {
     const newHighscore = {name: this.form.value.name, score: this.highscore, photo: this.currentImage};
-    this.fizzBuzzService.storage.get('highscores').then( highscores => {
+    this.fizzBuzzService.storage.get('highscores').then( (highscores: Highscore[])  => {
       if (Array.isArray(highscores)){
         this.fizzBuzzService.storage.set('highscores', [...highscores, newHighscore]);
         console.log(highscores);

@@ -8,7 +8,7 @@ import {
     switchMap,
     distinctUntilChanged,
     map,
-    filter, scan, tap, share,
+    filter, scan, tap, share, take,
 } from 'rxjs/operators';
 import {Router} from '@angular/router';
 
@@ -33,6 +33,7 @@ export class GamePage implements OnInit, AfterViewInit {
   constructor(private fizzbuzzService: FizzbuzzService, private router: Router) { }
   ngOnInit() {
     this.fizzBuzz$ = this.fizzbuzzService.fizzBuzz$;
+    this.fizzbuzzService.highscore$.next(0);
   }
 
   ngAfterViewInit() {
@@ -80,7 +81,8 @@ export class GamePage implements OnInit, AfterViewInit {
                   this.router.navigate(['/enter-highscore'], {replaceUrl: true });
               }
             }
-        )
+        ),
+        share()
     );
   }
 

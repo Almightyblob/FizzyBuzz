@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FizzbuzzService} from '../../services/fizzbuzz.service';
 import {Router} from '@angular/router';
+import {Highscore} from '../../models/highscore.model';
 
 @Component({
   selector: 'app-high-scores',
@@ -14,7 +15,7 @@ export class HighScoresPage implements OnInit{
               private router: Router) { }
 
   loadScores() {
-    this.fizzBuzzService.storage.get('highscores').then((highscores) => {
+    this.fizzBuzzService.storage.get('highscores').then((highscores: Highscore[]) => {
       this.highscores = highscores || [];
     }).then(() => {
       this.highscores.sort((a, b) => {
@@ -28,7 +29,6 @@ export class HighScoresPage implements OnInit{
   }
 
   resetScores(){
-    this.fizzBuzzService.highscores = [];
     this.fizzBuzzService.storage.clear();
     this.loadScores();
   }
