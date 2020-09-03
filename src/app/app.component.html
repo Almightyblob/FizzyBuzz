@@ -3,14 +3,18 @@
   <ion-menu contentId="main" type="reveal" side="end">
     <ion-header>
       <ion-toolbar>
-        <ion-title> MAIN MENU</ion-title>
+        <ion-title class="menu-title">
+          <ion-text color="primary">
+            MAIN MENU
+          </ion-text>
+        </ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-menu-toggle auto-hide="false">
         <ion-list *ngFor="let page of pages">
           <ion-item [routerLink]="page.url" [replaceUrl]="true">
-              <ion-label>{{page.title}}</ion-label>
+              <ion-label color="secondary" class="menu-item">{{page.title}}</ion-label>
           </ion-item>
         </ion-list>
       </ion-menu-toggle>

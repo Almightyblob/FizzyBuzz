@@ -1,0 +1,18 @@
+.startButton-container {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  .get-ready {
+    font-family: Anton, sans-serif;
+  }
+
+  .start-button {
+    font-family: Teko-SemiBold, sans-serif;
+    font-size: 20px;
+  }
+}
+
+

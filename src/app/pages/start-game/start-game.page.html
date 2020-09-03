@@ -1,14 +1,20 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Get Ready!</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="startButton-container ion-padding ion-text-center">
-    <ion-button routerLink="/game">START</ion-button>
+    <div>
+      <h1 class="ion-padding-bottom get-ready">
+         GET READY
+      </h1>
+      <ion-button routerLink="/game" class="start-button">
+        Start
+      </ion-button>
+    </div>
   </div>
 </ion-content>

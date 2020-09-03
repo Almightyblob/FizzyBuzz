@@ -9,7 +9,7 @@ import {Highscore} from '../../models/highscore.model';
   styleUrls: ['./high-scores.page.scss'],
 })
 export class HighScoresPage implements OnInit{
-  highscores;
+  highscores: Highscore[] = [];
 
   constructor(private fizzBuzzService: FizzbuzzService,
               private router: Router) { }

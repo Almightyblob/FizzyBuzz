@@ -1,50 +1,54 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      enter-highscore
-    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size-md="6" offset-md="3" class="ion-text-center">
-
+      <ion-col size-md="6" offset-md="3" class="ion-text-center your-score" >
+        <h1>
+          <ion-text color="danger">
+            GAME OVER
+          </ion-text>
+        </h1>
+        <h3>
+          <ion-text color="primary">
+            YOUR SCORE
+          </ion-text>
+        </h3>
+        <h3>
+          <ion-text color="secondary">
+           {{highscore}}
+          </ion-text>
+        </h3>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size-md="6" offset-md="3" class="ion-text-center">
-        <h3>
-          NEW HIGH SCORE:
-        </h3>
-        <h3>
-          {{highscore}}
-        </h3>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size-md="6" offset-md="3" class="ion-text-center">
-        <p>
-          Do you want to save your highscore?
+        <p class="highscore-text">
+          Do you want to save this to your highscores?
         </p>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size-md="6" offset-md="3" class="ion-text-center">
-        <form [formGroup]="form">
+        <form [formGroup]="form" class="highscore-form">
           <ion-item>
-            <ion-label>
+            <ion-label class="form-label">
               Name
             </ion-label>
-            <ion-input type="text" formControlName="name"></ion-input>
+            <ion-input type="text" formControlName="name" class="form-input"></ion-input>
           </ion-item>
         </form>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size-md="6" offset-md="3" class="ion-text-center">
-        <p>
+        <p class="highscore-text">
           Take a photo!
         </p>
         <ion-button (click)="takePicture()" >
@@ -54,10 +58,10 @@
     </ion-row>
     <ion-row>
       <ion-col size-md="6" offset-md="3" class="ion-text-center">
-        <ion-button (click)="save()" color="primary">
+        <ion-button (click)="save()" color="primary" class="highscore-button">
           Save Highscore
         </ion-button>
-        <ion-button routerLink="/game" color="danger">
+        <ion-button routerLink="/game" color="tertiary" class="highscore-button">
           Play Again
         </ion-button>
       </ion-col>
