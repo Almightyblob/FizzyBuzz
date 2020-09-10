@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FizzbuzzService } from './services/fizzbuzz.service';
 import {FormBuilder} from '@angular/forms';
 import {IonicStorageModule} from '@ionic/storage';
+import {WebView} from '@ionic-native/ionic-webview/ngx';
+import {ImagePicker} from '@ionic-native/image-picker/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,8 +25,9 @@ import {IonicStorageModule} from '@ionic/storage';
       SplashScreen,
       FizzbuzzService,
       Camera,
-      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-
+      WebView,
+      ImagePicker,
+      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
